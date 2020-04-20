@@ -1,11 +1,11 @@
 {
 	"name": "@mudas/env",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "A library project using commonjs type",
-	"author": "张雄军 <zxj@blibao.cn>",
+	"author": "mudas(aosnow@yeah.net)",
 	"license": "MIT",
 	"main": "dist/env.common.js",
-	"module": "",
+	"module": "dist/env.esm.js",
 	"homepage": "https://github.com/aosnow/env",
 	"repository": {
 		"type": "git",
@@ -14,8 +14,7 @@
 	"keywords": [],
 	"scripts": {
 		"serve": "vue-cli-service serve",
-		"build": "vue-cli-service build --target lib --name env packages/index.js",
-		"report": "vue-cli-service build --target lib --name env packages/index.js --report",
+		"build": "rollup -c",
 		"lint": "vue-cli-service lint",
 		"test:unit": "vue-cli-service test:unit",
 		"pub": "npm run build && npm publish --access=public"
@@ -47,6 +46,8 @@
 		"eslint": "^6.7.2",
 		"eslint-plugin-import": "^2.20.1",
 		"eslint-plugin-vue": "^6.1.2",
+		"rollup": "^2.6.1",
+		"rollup-plugin-delete": "^1.2.0",
 		"vue": "^2.6.11",
 		"vue-template-compiler": "^2.6.11"
 	}
