@@ -20,13 +20,13 @@ module.exports = {
 ```
 
 
-### Usage	
+### Usage
 
 ```js
 import { parsingUserAgentEnv, parsingAppletEnv, parsingURLParams } from '@mudas/env';
 
 // Applet ENV
-parsingAppletEnv({ ...parsingUserAgentEnv(), ...parsingURLParams() }).then((data) => {
+parsingApplet({ ...parsingUserAgent(), ...parsingURLParams() }).then((data) => {
     // ... return types/EnvHolderType & { wechatApplet:boolean, alipayApplet:boolean }
 });
 

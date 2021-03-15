@@ -9,7 +9,7 @@
  * @param {Object} holder
  * @return {EnvHolderType}
  */
-export function parsingUserAgentEnv(holder = null) {
+export function parsingUserAgent(holder = null) {
   /*
     微信：
     --------------------------------------------------------------------
@@ -76,7 +76,7 @@ export function parsingUserAgentEnv(holder = null) {
     MQQBrowser/9.8 Mobile Safari/537.36
    */
 
-  const navigator = window.navigator;
+  const { navigator } = window;
   const agent = navigator.userAgent;
   const result = holder || Object.create(null);
 
@@ -90,7 +90,7 @@ export function parsingUserAgentEnv(holder = null) {
 
   // 支付宝 AlipayClient
   // 口碑和支付宝 app 拥有共同的 AlipayClient 标识
-  // 若已经判定属于口碑环境，则无需判定支付宝环境
+  // 若已经判定属于口碑环境，则无需判定支付宝环境（即此情况下支付宝必定 false）
   result.alipay = result.koubei ? false : /AlipayClient/i.test(agent);
 
   // 钉钉 DingTalk
@@ -108,15 +108,21 @@ export function parsingUserAgentEnv(holder = null) {
   // 调试环境或其它未知环境（当以上环境都无效时的环境）
   result.unknow = !result.koubei && !result.alipay && !result.ding && !result.wechat && !result.qbrowser;
 
+  // 小程序环境检测
+  // 从微信7.0.0开始，可以通过判断userAgent中包含miniProgram字样来判断小程序web-view环境。
+  // https://developers.weixin.qq.com/miniprogram/dev/component/web-view.html#相关接口-5
+  // https://opendocs.alipay.com/mini/component/web-view#%E5%B1%9E%E6%80%A7%E8%AF%B4%E6%98%8E
+  result.miniProgram = /miniProgram/i.test(agent); // 支付宝或微信环境（支付宝小程序开发工具似乎无效）
+
   return result;
 }
 
 /**
- * 检测是否为小程序环境
+ * 检测是否为小程序环境（使用 getEnv() 方法）
  * @param {Object} holder
  * @return {Promise<{wechatApplet:boolean,alipayApplet:boolean}>}
  */
-export function parsingAppletEnv(holder = null) {
+export function parsingApplet(holder = null) {
   return new Promise(resolve => {
     const env = holder || Object.create(null);
 
@@ -128,16 +134,18 @@ export function parsingAppletEnv(holder = null) {
     // 支付宝小程序：https://appx/web-view.min.js
     // 微信小程序：https://res.wx.qq.com/open/js/jweixin-1.3.2.js
 
+    const { wx, my } = window;
+
     // 若为微信APP浏览器环境，检测是否为小程序
-    if (window.wx) {
-      window.wx.miniProgram.getEnv((res) => {
+    if (wx) {
+      wx.miniProgram.getEnv((res) => {
         env.wechatApplet = !!res.miniprogram || !!res.miniProgram;
         resolve(env);
       });
     }
     // 若为支付宝APP浏览器环境，检测是否为小程序
-    else if (window.my) {
-      window.my.getEnv((res) => {
+    else if (my) {
+      my.getEnv((res) => {
         env.alipayApplet = !!res.miniprogram || !!res.miniProgram;
         resolve(env);
       });

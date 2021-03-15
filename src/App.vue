@@ -2,13 +2,13 @@
   <div id="app">
     <el-page-header title="返回" content="测试"></el-page-header>
 
-    <div>{{env}}</div>
+    <pre>{{env}}</pre>
 
   </div>
 </template>
 
 <script>
-import { parsingUserAgentEnv, parsingAppletEnv, parsingURLParams } from '@mudas/env';
+import { parsingUserAgent, parsingApplet, parsingURLParams } from '@mudas/env';
 
 export default {
   name: 'app',
@@ -21,9 +21,26 @@ export default {
   },
 
   created() {
-    parsingAppletEnv({ ...parsingUserAgentEnv(), ...parsingURLParams() }).then((data) => {
+    console.warn(window.navigator.userAgent);
+
+    if (!window.WeixinJSBridge || !window.WeixinJSBridge.invoke) {
+      document.addEventListener('WeixinJSBridgeReady', this.ready, false);
+    }
+    else {
+      this.ready();
+    }
+
+    parsingApplet({ ...parsingUserAgent(), ...parsingURLParams() }).then((data) => {
       this.env = data;
+      console.warn(data);
     });
+  },
+
+  methods: {
+    // web-view下的页面内
+    ready() {
+      console.log(window.__wxjs_environment, window.__wxjs_environment === 'miniprogram'); // true
+    }
   }
 };
 </script>
@@ -35,11 +52,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin: 50px;
-}
-
-.el-form {
-  width: 50%;
-  min-width: 200px;
-  max-width: 500px;
 }
 </style>

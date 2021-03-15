@@ -1,54 +1,60 @@
 {
-	"name": "@mudas/env",
-	"version": "0.0.2",
-	"description": "A library project using commonjs type",
-	"author": "mudas(aosnow@yeah.net)",
-	"license": "MIT",
-	"main": "dist/env.common.js",
-	"module": "dist/env.esm.js",
-	"homepage": "https://github.com/aosnow/env",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/aosnow/env"
-	},
-	"keywords": [],
-	"scripts": {
-		"serve": "vue-cli-service serve",
-		"build": "rollup -c",
-		"lint": "vue-cli-service lint",
-		"test:unit": "vue-cli-service test:unit",
-		"pub": "npm run build && npm publish --access=public"
-	},
-	"typings": "types/index.d.ts",
-	"files": [
-		"dist",
-		"packages",
-		"types",
-		"package.json",
-		"README.md"
-	],
-	"optionalDependencies": {
-		"fsevents": "*"
-	},
-	"dependencies": {
-		"core-js": "^3.6.4",
-		"query-string": "^6.12.0"
-	},
-	"devDependencies": {
-		"@vue/cli-plugin-babel": "~4.2.0",
-		"@vue/cli-plugin-eslint": "~4.2.0",
-		"@vue/cli-plugin-unit-jest": "~4.2.0",
-		"@vue/cli-service": "~4.2.0",
-		"@vue/eslint-config-airbnb": "^5.0.2",
-		"@vue/test-utils": "1.0.0-beta.31",
-		"babel-eslint": "^10.0.3",
-		"element-ui": "^2.13.0",
-		"eslint": "^6.7.2",
-		"eslint-plugin-import": "^2.20.1",
-		"eslint-plugin-vue": "^6.1.2",
-		"rollup": "^2.6.1",
-		"rollup-plugin-delete": "^1.2.0",
-		"vue": "^2.6.11",
-		"vue-template-compiler": "^2.6.11"
-	}
+  "name": "@mudas/env",
+  "version": "0.0.3",
+  "description": "A plugin for environment",
+  "author": "mudas(aosnow@yeah.net)",
+  "license": "MIT",
+  "main": "dist/env.common.js",
+  "module": "dist/env.esm.js",
+  "homepage": "https://github.com/aosnow/env",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aosnow/env"
+  },
+  "keywords": [
+    "env",
+    "user-agent"
+  ],
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "rollup -c",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit",
+    "pub": "npm run build && npm publish --access=public"
+  },
+  "typings": "types/index.d.ts",
+  "files": [
+    "dist",
+    "packages",
+    "types",
+    "package.json",
+    "README.md"
+  ],
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
+  "peerDependencies": {
+    "core-js": ">=3.6.5",
+    "query-string": ">=6.12.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "@vue/test-utils": "^1.0.3",
+    "babel-eslint": "^10.1.0",
+    "core-js": "^3.6.5",
+    "element-ui": "^2.13.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "query-string": "^6.14.1",
+    "rollup": "^2.6.1",
+    "rollup-plugin-delete": "^1.2.0",
+    "vconsole": "^3.4.0",
+    "vue": "^2.6.12",
+    "vue-template-compiler": "^2.6.12"
+  }
 }
