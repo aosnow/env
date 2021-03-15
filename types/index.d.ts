@@ -33,6 +33,9 @@ export declare interface EnvHolderType {
 
   // 调试环境或其它未知环境（当以上环境都无效时的环境）
   unknow?: boolean;
+
+  // 是否小程序 web-view 环境
+  miniProgram?: boolean;
 }
 
 /**
@@ -40,14 +43,14 @@ export declare interface EnvHolderType {
  * @param {Object} holder
  * @return {EnvHolderType}
  */
-export function parsingUserAgentEnv(holder?: Object): EnvHolderType;
+export function parsingUserAgent(holder?: Object): EnvHolderType;
 
 /**
  * 检测是否为小程序环境（异步方式）
  * @param {Object} holder
  * @return {Promise<{wechatApplet:boolean,alipayApplet:boolean}>}
  */
-export function parsingAppletEnv(holder?: Object): Promise<{ wechatApplet: boolean, alipayApplet: boolean }>;
+export function parsingApplet(holder?: Object): Promise<{ wechatApplet: boolean, alipayApplet: boolean }>;
 
 /**
  * 检测收集 url 参数集合

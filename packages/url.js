@@ -6,7 +6,7 @@
 
 import Query from 'query-string';
 
-export function hasQuery(value, flag = '?') {
+function _hasQuery(value, flag = '?') {
   return value.indexOf(flag) !== -1;
 }
 
@@ -18,12 +18,12 @@ export function parsingURLParams() {
   const { search = '', hash = '' } = window.location;
 
   // url 参数紧跟 pathname
-  if (hasQuery(search)) {
+  if (_hasQuery(search)) {
     return Query.parse(search.slice(search.indexOf('?') + 1));
   }
 
   // url 参数紧跟 #hash 之后
-  else if (hasQuery(hash)) {
+  else if (_hasQuery(hash)) {
     return Query.parse(hash.slice(hash.indexOf('?') + 1));
   }
 
