@@ -22,3 +22,4 @@ yarn-error.log*
 
 # template dev files
 package-*.json
+yarn.*

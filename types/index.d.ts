@@ -54,6 +54,8 @@ export function parsingApplet(holder?: Object): Promise<{ wechatApplet: boolean,
 
 /**
  * 检测收集 url 参数集合
+ * - 此方法会同时收集 hash 和 search 中的 query 参数并合并返回。
+ * @param {URL|object} [target=window.location] 目标URL对象（window.location 或者 URL 对象、包含 search、hash 的对象）
  * @return {Object}
  */
-export function parsingURLParams(): Object;
+export function parsingURLParams(target?: URL | object): Object;
